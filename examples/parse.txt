@@ -1,0 +1,25 @@
+shape = {
+
+type = "1tetrahedron"
+
+vertices = {
+
+pointsType = "Three_dimensional"
+
+point = { x = "1" y = "0" z = "0" }
+
+point = { x = "0" y = "1" z = "0" }
+
+point = { nestedObject1 = { a = "_A" b = "B_"  extraNestedObject = { extraVariable = "Me_Here" } } x = "0" y = "0" z = "1" nestedObject2 = { j = "J" k = "qwe_rty" } pointVariable = "trailing Point Variable" }
+
+point = { x = "1" y = "1" z = "1" }
+
+}
+
+program = "parser"
+
+color = { r = "0xFF" g = "0x00" b = "0x80" alpha = "0x80" }
+
+works = "YES"
+
+}

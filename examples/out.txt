@@ -1,0 +1,46 @@
+---Id: 1, Parent id: not available (root), Name: shape
+   Variables:
+   Variable id: 11, Parent id: 1, Name: works, Value: YES
+   Variable id: 12, Parent id: 1, Name: type, Value: 1tetrahedron
+   Variable id: 33, Parent id: 1, Name: program, Value: parser
+------Id: 2, Parent id: 1, Name: vertices
+      Variables:
+      Variable id: 13, Parent id: 2, Name: pointsType, Value: Three_dimensional
+---------Id: 3, Parent id: 2, Name: point
+         Variables:
+         Variable id: 14, Parent id: 3, Name: x, Value: 1
+         Variable id: 15, Parent id: 3, Name: y, Value: 0
+         Variable id: 16, Parent id: 3, Name: z, Value: 0
+---------Id: 4, Parent id: 2, Name: point
+         Variables:
+         Variable id: 17, Parent id: 4, Name: x, Value: 0
+         Variable id: 18, Parent id: 4, Name: y, Value: 1
+         Variable id: 19, Parent id: 4, Name: z, Value: 0
+---------Id: 5, Parent id: 2, Name: point
+         Variables:
+         Variable id: 20, Parent id: 5, Name: pointVariable, Value: trailing Point Variable
+         Variable id: 24, Parent id: 5, Name: x, Value: 0
+         Variable id: 25, Parent id: 5, Name: y, Value: 0
+         Variable id: 26, Parent id: 5, Name: z, Value: 1
+------------Id: 6, Parent id: 5, Name: nestedObject1
+            Variables:
+            Variable id: 21, Parent id: 6, Name: a, Value: _A
+            Variable id: 22, Parent id: 6, Name: b, Value: B_
+---------------Id: 7, Parent id: 6, Name: extraNestedObject
+               Variables:
+               Variable id: 23, Parent id: 7, Name: extraVariable, Value: Me_Here
+------------Id: 8, Parent id: 5, Name: nestedObject2
+            Variables:
+            Variable id: 27, Parent id: 8, Name: j, Value: J
+            Variable id: 28, Parent id: 8, Name: k, Value: qwe_rty
+---------Id: 9, Parent id: 2, Name: point
+         Variables:
+         Variable id: 30, Parent id: 9, Name: x, Value: 1
+         Variable id: 31, Parent id: 9, Name: y, Value: 1
+         Variable id: 32, Parent id: 9, Name: z, Value: 1
+------Id: 10, Parent id: 1, Name: color
+      Variables:
+      Variable id: 34, Parent id: 10, Name: r, Value: 0xFF
+      Variable id: 35, Parent id: 10, Name: g, Value: 0x00
+      Variable id: 36, Parent id: 10, Name: b, Value: 0x80
+      Variable id: 37, Parent id: 10, Name: alpha, Value: 0x80
