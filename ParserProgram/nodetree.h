@@ -20,7 +20,7 @@ namespace Pr
                         const std::string &source);
         void parsePrefix(const std::string &prefix,
                          const std::regex &variableRegexp,
-                         weakNodePtr &parent);
+                         Node *parent);
         void parseSuffix(const std::string &suffix,
                          const std::regex &variableRegexp,
                          const std::regex &listRegexp,
