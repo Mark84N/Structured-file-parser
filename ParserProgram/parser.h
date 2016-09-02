@@ -5,10 +5,10 @@
 #include "variablenode.h"
 #include "nodetree.h"
 
-namespace Pr{
-
-    class ParserProgram{
-
+namespace Pr
+{
+    class ParserProgram
+    {
     private:
 
         std::string _sourceString;

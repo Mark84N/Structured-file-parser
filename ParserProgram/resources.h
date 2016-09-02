@@ -11,8 +11,8 @@
 #include <regex>
 #include <exception>
 
-namespace Pr{
-
+namespace Pr
+{S
 class Node;
 class VariableNode;
 class NodeTree;

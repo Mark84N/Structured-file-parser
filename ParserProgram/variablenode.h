@@ -3,10 +3,10 @@
 
 #include "resources.h"
 
-namespace Pr{
-
-    class VariableNode{
-
+namespace Pr
+{
+    class VariableNode
+    {
     private:
 
         std::string _variableName;

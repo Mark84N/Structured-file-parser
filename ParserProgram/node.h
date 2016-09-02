@@ -3,10 +3,10 @@
 
 #include "resources.h"
 
-namespace Pr{
-
-    class Node{
-
+namespace Pr
+{
+    class Node
+    {
     private:
 
         std::vector<sharedNodePtr> _children;
@@ -46,7 +46,6 @@ namespace Pr{
         void addVariable(const sharedVariablePtr &var);
         void setListName(const std::string str);
         void setId(int id);
-
     };
 }
 

@@ -3,10 +3,10 @@
 
 #include "resources.h"
 
-namespace Pr{
-
-    class NodeTree{
-
+namespace Pr
+{
+    class NodeTree
+    {
     private:
 
         sharedNodePtr _root;
