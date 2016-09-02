@@ -44,7 +44,7 @@ void Pr::NodeTree::addNewNode(const Pr::Node &node)
         /* случай: если вложено сразу под последним узлом */
         if (currentNest == newNodeNest - 1)
         {
-            _latestNode->addChild(newNode, _latestNode);
+            _latestNode->addChild(newNode);
             _latestNode = newNode;
         }
     }
@@ -52,10 +52,9 @@ void Pr::NodeTree::addNewNode(const Pr::Node &node)
     /* случай: одинаковая вложенность с последним узлом */
     else if (newNodeNest == currentNest)
     {
-        auto weakParent = _latestNode->getParent();
-        auto commonParent = weakParent.lock();
+        Node* commonParent = _latestNode->getParent();
 
-        commonParent->addChild(newNode, weakParent);
+        commonParent->addChild(newNode);
 
         _latestNode = newNode;
     }
@@ -63,24 +62,21 @@ void Pr::NodeTree::addNewNode(const Pr::Node &node)
     /* случай: вложеность - выше чем у последнего узла, родитель где-то выше  */
     else
     {
-        auto weakParent = _latestNode->getParent();
-        auto nodeUpperOneLevel = weakParent.lock();
+        auto nodeUpperOneLevel = _latestNode->getParent();
 
         int parentNest = nodeUpperOneLevel->getNesting();
 
         while (parentNest < newNodeNest)
         {
-            nodeUpperOneLevel =
-                    nodeUpperOneLevel->getParent().lock();
+            nodeUpperOneLevel = nodeUpperOneLevel->getParent();
             parentNest = nodeUpperOneLevel->getNesting();
         }
         /* once we're on the right level, then: */
         /* подняться до необходимого уровня, и: */
 
-        auto weakParent_2 = nodeUpperOneLevel->getParent();
-        auto commonParent = weakParent_2.lock();
+        auto commonParent = nodeUpperOneLevel->getParent();
 
-        commonParent->addChild(newNode, weakParent_2);
+        commonParent->addChild(newNode);
         _latestNode = newNode;
     }
 }
@@ -101,7 +97,8 @@ void Pr::NodeTree::insertHere(const sharedNodePtr &node,
 {
         /* for root node */
         /* для корневого узла */
-        if (!node->getParent().lock())
+        //if (!node->getParent().lock())
+        if (!node->getParent())
         {
             /* get raw string to parse then */
             /* получить необработанную строку для парсинга */
@@ -115,8 +112,7 @@ void Pr::NodeTree::insertHere(const sharedNodePtr &node,
         }
         else
         {
-            auto weakParent = node->getParent();
-            auto parent =  weakParent.lock();
+            Node* parent =  node->getParent();
             auto siblings = parent->getChildren();
 
             int startOffset = parent->getBodyPosition().first;
@@ -206,15 +202,14 @@ void Pr::NodeTree::retrieveListNameAndVariables(const std::string &s,
 
     node->setListName(name);
 
-    auto weakParent = node->getParent();
-    auto parent = weakParent.lock();
+    Node* parent = node->getParent();
 
     /* if prefix contains variables - they belong to parent */
     /* если в префиксе найдены переменные - присвоить их родителю */
 
     if (prefix.length() > 2) // don't consider the garbage: spaces or brace '{'
     {
-        parsePrefix(prefix, variableRegexp, weakParent);
+        parsePrefix(prefix, variableRegexp, parent);
     }
 
     /* collect variables, that current node owns */
@@ -244,8 +239,8 @@ void Pr::NodeTree::showChildren(const Pr::sharedNodePtr &node,
 
     if (node != _root)
     {
-        int parentId = node->getParent().lock()->getId();
-
+        int parentId = //node->getParent().lock()->getId();
+        node->getParent()->getId();
         os << "Id: " << id << ", ";
         os << "Parent id: " << parentId << ", ";
         os << "Name: " << node->getListName() << "\n";
@@ -266,7 +261,7 @@ void Pr::NodeTree::showChildren(const Pr::sharedNodePtr &node,
         {
             showOffset(os, nest, "   ");
             os << "Variable id: " << tempVar->getId() << ", ";
-            os << "Parent id: " << tempVar->getParent().lock()->getId() << ", ";
+            os << "Parent id: " << tempVar->getParent()->getId();//.lock()->getId() << ", ";
             os << "Name: " << tempVar->getVariableName() << ", ";
             os << "Value: "<< tempVar->getVariableValue() << "\n";
         }
@@ -282,7 +277,7 @@ int Pr::NodeTree::_currentId = 1;
 
 void Pr::NodeTree::parsePrefix(const std::string &prefix,
                                const std::regex &variableRegexp,
-                               Pr::weakNodePtr &weakParent){
+                               Node *parent){
 
     for(std::sregex_iterator it =
         std::sregex_iterator(prefix.begin(),prefix.end(), variableRegexp);
@@ -293,10 +288,9 @@ void Pr::NodeTree::parsePrefix(const std::string &prefix,
         auto data = std::make_shared<Pr::VariableNode>
                             (Pr::VariableNode(s[1].str(),
                                               s[2].str(),
-                                              weakParent,
+                                              parent,
                                               this->_currentId++,
                                               Pr::Type::DATA));
-        auto parent = weakParent.lock();
         parent->addVariable(data);
     }
 }
@@ -321,19 +315,18 @@ void Pr::NodeTree::parseSuffix(const std::string &suffix,
             {
 
                 std::smatch s = *it;
-                Pr::weakNodePtr weakParentNode = node;
-
+                Node *parentNode = node.get();
                 auto data = std::make_shared<Pr::VariableNode>
                                     (Pr::VariableNode(s[1].str(),
                                                       s[2].str(),
-                                                      weakParentNode,
+                                                      parentNode,
                                                       _currentId++,
                                                       Pr::Type::DATA));
 
                if (s.position(0) < listBodyEnd)
                {
                     node->addVariable(data);
-                    data->setParent(node);
+                    data->setParent(parentNode);
                }
             }
         }
@@ -358,12 +351,11 @@ void Pr::NodeTree::parseSuffix(const std::string &suffix,
         {
 
             std::smatch s = *it;
-            Pr::weakNodePtr weakCurrentNode = node;
-
+            Node *currentNode = node.get();
             auto data = std::make_shared<Pr::VariableNode>
                                 (Pr::VariableNode(s[1].str(),
                                               s[2].str(),
-                                              weakCurrentNode,
+                                              currentNode,
                                               _currentId++,
                                               Pr::Type::DATA));
             node->addVariable(data);

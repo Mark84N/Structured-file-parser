@@ -1,9 +1,11 @@
 #include "node.h"
 #include "variablenode.h"
 
-Pr::VariableNode::VariableNode(const std::string &name,
+using namespace  Pr;
+
+VariableNode::VariableNode(const std::string &name,
                                const std::string &value,
-                               weakNodePtr &parent,
+                               Node* parent,
                                int id,
                                Type varType):
     _variableName(name),
@@ -13,52 +15,53 @@ Pr::VariableNode::VariableNode(const std::string &name,
     _varType(varType)
 { }
 
-Pr::VariableNode::VariableNode(const std::string &name,
-                               const weakNodePtr &parent,
+VariableNode::VariableNode(const std::string &name,
+                               Node *parent,
                                int id):
     _variableName(name),
     _variableValue(),
     _parent(parent),
     _id(id),
-    _varType(Pr::Type::DATA)
+    _varType(Type::DATA)
 { }
 
-Pr::VariableNode::VariableNode():
+VariableNode::VariableNode():
     _variableName(),
     _variableValue(),
-    _parent(),
+    _parent(nullptr),
     _id(0),
-    _varType(Pr::Type::DATA)
+    _varType(Type::DATA)
 { }
 
-std::string Pr::VariableNode::getVariableName()const
+std::string VariableNode::getVariableName()const
 {
     return _variableName;
 }
 
-std::string Pr::VariableNode::getVariableValue()const
+std::string VariableNode::getVariableValue()const
 {
     return _variableValue;
 }
 
-Pr::weakNodePtr Pr::VariableNode::getParent()const
+Node* VariableNode::getParent()const
 {
     return _parent;
 }
 
-void Pr::VariableNode::setVariableName(const std::string name)
+void VariableNode::setVariableName(const std::string name)
 {
     if (!name.empty())
         _variableName = name;
 }
 
-void Pr::VariableNode::setParent(const weakNodePtr &parent)
+void VariableNode::setParent(Node *parent)
 {
-    if (parent.lock())
+    //if (parent.lock())
+    if (parent)
         _parent = parent;
 }
 
-int Pr::VariableNode::getId()const
+int VariableNode::getId()const
 {
     return _id;
 }

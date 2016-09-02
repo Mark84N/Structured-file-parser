@@ -11,29 +11,34 @@ namespace Pr
 
         std::string _variableName;
         std::string _variableValue;
-        weakNodePtr _parent;
+        Node* _parent;
         int _id;
-        Pr::Type _varType;
+        Type _varType;
 
     public:
 
         VariableNode(const std::string &name,
-                     const weakNodePtr &parent,
+                     Node* parent,
                      int id);
         VariableNode(const std::string &name,
                      const std::string &value,
-                     weakNodePtr &parent,
+                     Node *parent,
                      int id,
-                     Pr::Type varType);
+                     Type varType);
         VariableNode();
+        ~VariableNode()
+        {
+            std::cout << "\Variable id = " << _id << " is deleted\n";
+        }
+
 
         std::string getVariableName()const;
         std::string getVariableValue()const;
-        weakNodePtr getParent()const;
+        Node* getParent()const;
         int getId()const;
 
         void setVariableName(const std::string name);
-        void setParent(const weakNodePtr &parent);
+        void setParent(Node *parent);
     };
 
 }
