@@ -1,7 +1,7 @@
 #include <parser.h>
 
-int main(int argc, char *argv[]){
-
+int main(int argc, char *argv[])
+{
     try
     {
         Pr::ParserProgram pr("parse.txt");
@@ -23,7 +23,6 @@ int main(int argc, char *argv[]){
         std::cerr << err.what();
         exit(1);
     }
-
 
     return 0;
 }
