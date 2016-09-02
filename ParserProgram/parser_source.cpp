@@ -1,6 +1,7 @@
 #include "parser.h"
+using namespace Pr;
 
-Pr::ParserProgram::ParserProgram(std::ifstream &readStr):
+ParserProgram::ParserProgram(std::ifstream &readStr):
     _sourceString(""),
     _tree(nullptr)
 {
@@ -9,13 +10,13 @@ Pr::ParserProgram::ParserProgram(std::ifstream &readStr):
     releaseTheKraken();
 }
 
-Pr::ParserProgram::ParserProgram(const std::string &filename):
+ParserProgram::ParserProgram(const std::string &filename):
     _sourceString(""),
     _tree(nullptr)
 {
 
     std::ifstream readStr;
-    readStr.open(filename);
+    readStr.open(filename, std::ios_base::in);
 
     if (!readStr.is_open())
     {
@@ -28,7 +29,7 @@ Pr::ParserProgram::ParserProgram(const std::string &filename):
     releaseTheKraken();
 }
 
-void Pr::ParserProgram::readFromStream(std::ifstream &readStr)
+void ParserProgram::readFromStream(std::ifstream &readStr)
 {
     std::string temp;
 
@@ -40,7 +41,7 @@ void Pr::ParserProgram::readFromStream(std::ifstream &readStr)
     }
 }
 
-int Pr::ParserProgram::calculateNodeNesting(int position,
+int ParserProgram::calculateNodeNesting(int position,
                                             const std::vector<std::pair<int, int> > &vector)
 {
     std::pair<int, int> coord = vector[position];
@@ -56,16 +57,16 @@ int Pr::ParserProgram::calculateNodeNesting(int position,
     return nesting;
 }
 
-std::vector<Pr::Node> Pr::ParserProgram::getNodesWithNesting
+std::vector<Node> ParserProgram::getNodesWithNesting
 (const std::vector<std::pair<int, int> > &positions)
 {
-    std::vector<Pr::Node> nodes;
+    std::vector<Node> nodes;
 
     for (int i = 0; i < positions.size(); i++)
     {
-        Pr::Node _node;
+        Node _node;
 
-        _node.setNodeType(Pr::Type::LIST);
+        _node.setNodeType(Type::LIST);
         _node.setNesting(calculateNodeNesting(i,positions));
         _node.setBodyPosition((positions[i]));
 
@@ -75,7 +76,7 @@ std::vector<Pr::Node> Pr::ParserProgram::getNodesWithNesting
     return nodes;
 }
 
-std::vector<std::pair<int, int> > Pr::ParserProgram::getStructuresPositions()
+std::vector<std::pair<int, int> > ParserProgram::getStructuresPositions()
 {
     std::vector<int>beginnings;
     std::vector<std::pair<int, int>> positions;
@@ -123,28 +124,28 @@ std::vector<std::pair<int, int> > Pr::ParserProgram::getStructuresPositions()
     return positions;
 }
 
-void Pr::ParserProgram::releaseTheKraken()
+void ParserProgram::releaseTheKraken()
 {
     /* get hierarchy vector of nodes based on the positions of { } */
     /* получить иерархический вектор узлов на основании позиций их { } */
     auto nodesVector =
             getNodesWithNesting(getStructuresPositions());
 
-    _tree = std::make_shared<Pr::NodeTree>(Pr::NodeTree(nodesVector,
+    _tree = std::make_shared<NodeTree>(NodeTree(nodesVector,
                                                         this->_sourceString));
 }
 
-std::string Pr::ParserProgram::getSourceString()const
+std::string ParserProgram::getSourceString()const
 {
     return _sourceString;
 }
 
-Pr::sharedTreePtr Pr::ParserProgram::getTree()const
+sharedTreePtr ParserProgram::getTree()const
 {
     return _tree;
 }
 
-void Pr::ParserProgram::writeToFile(const std::string &filename)
+void ParserProgram::writeToFile(const std::string &filename)
 {
     std::ofstream fs;
 
@@ -158,7 +159,7 @@ void Pr::ParserProgram::writeToFile(const std::string &filename)
     fs.close();
 }
 
-void Pr::ParserProgram::printTreeStructure()
+void ParserProgram::printTreeStructure()
 {
     _tree->printOut(std::cout);
 }
