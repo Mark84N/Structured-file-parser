@@ -10,17 +10,14 @@ Node::Node():
     _bodyPosition(),
     _nodeName(),
     _nesting(0),
-    _id(0),
-    _nodeType(Type::LIST)
-
+    _id(0)
 { }
 
 Node::Node(Node * parent,
                const std::pair<int, int> &bodyPosition,
                const std::string &listName,
                int nesting,
-               int id,
-               Type nodeType):
+               int id):
 
     _children(),
     _dataVariables(),
@@ -28,8 +25,7 @@ Node::Node(Node * parent,
     _bodyPosition(bodyPosition),
     _nodeName(listName),
     _nesting(nesting),
-    _id(id),
-    _nodeType(nodeType)
+    _id(id)
 { }
 
 std::vector<sharedNodePtr> Node::getChildren() const
@@ -52,11 +48,6 @@ int Node::getNesting()const
     return _nesting;
 }
 
-Type Node::getNodeType()const
-{
-    return _nodeType;
-}
-
 void Node::setBodyPosition(const std::pair<int, int> &positions)
 {
     _bodyPosition = positions;
@@ -70,11 +61,6 @@ void Node::setParent(Node *parent)
 void Node::setNesting(int value)
 {
     _nesting = value;
-}
-
-void Node::setNodeType(Type t)
-{
-    _nodeType = t;
 }
 
 void Node::addChild(const sharedNodePtr &child)

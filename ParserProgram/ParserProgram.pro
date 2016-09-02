@@ -4,10 +4,10 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    node_source.cpp \
-    nodetree_source.cpp \
-    parser_source.cpp \
-    variablenode_source.cpp
+    node.cpp \
+    nodetree.cpp \
+    parser.cpp \
+    variablenode.cpp
 
 HEADERS += \
     node.h \
