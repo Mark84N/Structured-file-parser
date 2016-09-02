@@ -12,7 +12,7 @@
 #include <exception>
 
 namespace Pr
-{S
+{
 class Node;
 class VariableNode;
 class NodeTree;
