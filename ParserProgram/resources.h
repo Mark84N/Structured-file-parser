@@ -16,14 +16,16 @@ namespace Pr
 class Node;
 class VariableNode;
 class NodeTree;
+class ParseEngine;
+class ITreeWriter;
+class XMLTreeWriter;
 
-using sharedNodePtr = std::shared_ptr<Pr::Node>;
-using sharedVariablePtr = std::shared_ptr<Pr::VariableNode>;
-using weakNodePtr = std::weak_ptr<Pr::Node>;
-using sharedTreePtr = std::shared_ptr<Pr::NodeTree>;
-
-enum class Type{LIST, DATA};
-
+using SharedTreeWriter = std::shared_ptr<ITreeWriter>;
+using SharedParseEnginePtr = std::shared_ptr<ParseEngine>;
+using SharedNodePtr = std::shared_ptr<Node>;
+using SharedVariablePtr = std::shared_ptr<VariableNode>;
+using SharedTreePtr = std::shared_ptr<NodeTree>;
+using BracesIndexes = std::vector<std::pair<int, int>>;
 }
 
 #endif // RESOURCES_H
