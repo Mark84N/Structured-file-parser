@@ -6,12 +6,17 @@ CONFIG -= qt
 SOURCES += main.cpp \
     node.cpp \
     nodetree.cpp \
-    parser.cpp \
-    variablenode.cpp
+    variablenode.cpp \
+    parseengine.cpp \
+    xmltreewriter.cpp \
+    parserprogram.cpp
 
 HEADERS += \
     node.h \
     nodetree.h \
-    parser.h \
     resources.h \
-    variablenode.h
+    variablenode.h \
+    parseengine.h \
+    itreewriter.h \
+    xmltreewriter.h \
+    parserprogram.h
