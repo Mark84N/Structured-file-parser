@@ -2,51 +2,47 @@
 #define NODE_H
 
 #include "resources.h"
+#include "variablenode.h"
 
 namespace Pr
 {
-    class Node
-    {
-    private:
+class Node
+{
+public:
 
-        std::vector<sharedNodePtr>      _children;
-        std::vector<sharedVariablePtr>  _dataVariables;
-        std::pair<int, int>             _bodyPosition;
-        std::string                     _nodeName;
-        Node*                           _parent;
-        int                             _nesting;
-        int                             _id;
+    Node();
+    Node(Node * parent,
+         const std::pair<int, int> &bodyPosition,
+         const std::string &NodeName,
+         int nesting,
+         int id);
 
-    public:
+    std::vector<SharedNodePtr>      getChildren()const;
+    std::vector<SharedVariablePtr>  getVariables()const;
+    std::pair<int, int>             getBodyPosition()const;
+    std::string                     getNodeName()const;
+    Node *                          getParent()const;
+    int                             getNesting()const;
+    int                             getId()const;
 
-        Node();
-        Node(Node * parent,
-             const std::pair<int, int> &bodyPosition,
-             const std::string &listName,
-             int nesting,
-             int id);
+    void setBodyPosition(const std::pair<int, int> &positions);
+    void setParent(Node *parent);
+    void setNesting(int value);
+    void addChild(const SharedNodePtr &child);
+    void addVariable(const SharedVariablePtr &var);
+    void setNodeName(const std::string str);
+    void setId(int id);
 
-        ~Node()
-        {
-            std::cout << "\nNode id = " << _id << " is deleted\n";
-        }
+private:
 
-        std::vector<sharedNodePtr>      getChildren()const;
-        std::vector<sharedVariablePtr>  getVariables()const;
-        std::pair<int, int>             getBodyPosition()const;
-        std::string                     getListName()const;
-        Node *                          getParent()const;
-        int                             getNesting()const;
-        int                             getId()const;
-
-        void setBodyPosition(const std::pair<int, int> &positions);
-        void setParent(Node *parent);
-        void setNesting(int value);
-        void addChild(const sharedNodePtr &child);
-        void addVariable(const sharedVariablePtr &var);
-        void setListName(const std::string str);
-        void setId(int id);
-    };
+    std::vector<SharedNodePtr>      _children;
+    std::vector<SharedVariablePtr>  _dataVariables;
+    std::pair<int, int>             _bodyPosition;
+    std::string                     _nodeName;
+    Node*                           _parent;
+    int                             _nesting;
+    int                             _id;
+};
 }
 
 #endif // NODE_H

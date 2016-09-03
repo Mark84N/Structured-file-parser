@@ -1,34 +1,33 @@
 #include "node.h"
-#include "variablenode.h"
-
 using namespace Pr;
 
-Node::Node():
-    _children(),
-    _dataVariables(),
-    _parent(nullptr),
-    _bodyPosition(),
-    _nodeName(),
-    _nesting(0),
-    _id(0)
+Node::Node()
+    :
+      _children(),
+      _dataVariables(),
+      _bodyPosition(),
+      _nodeName(),
+      _parent(nullptr),
+      _nesting(0),
+      _id(0)
 { }
 
 Node::Node(Node * parent,
-               const std::pair<int, int> &bodyPosition,
-               const std::string &listName,
-               int nesting,
-               int id):
-
-    _children(),
-    _dataVariables(),
-    _parent(parent),
-    _bodyPosition(bodyPosition),
-    _nodeName(listName),
-    _nesting(nesting),
-    _id(id)
+           const std::pair<int, int> &bodyPosition,
+           const std::string &NodeName,
+           int nesting,
+           int id)
+    :
+      _children(),
+      _dataVariables(),
+      _bodyPosition(bodyPosition),
+      _nodeName(NodeName),
+      _parent(parent),
+      _nesting(nesting),
+      _id(id)
 { }
 
-std::vector<sharedNodePtr> Node::getChildren() const
+std::vector<SharedNodePtr> Node::getChildren() const
 {
     return _children;
 }
@@ -63,7 +62,7 @@ void Node::setNesting(int value)
     _nesting = value;
 }
 
-void Node::addChild(const sharedNodePtr &child)
+void Node::addChild(const SharedNodePtr &child)
 {
     if (child)
     {
@@ -73,34 +72,35 @@ void Node::addChild(const sharedNodePtr &child)
     }
 }
 
-void Node::addVariable(const sharedVariablePtr &var)
+void Node::addVariable(const SharedVariablePtr &var)
 {
     if (var)
         _dataVariables.push_back(var);
 
 }
 
-void Node::setListName(const std::string str)
+void Node::setNodeName(const std::string str)
 {
     if (!str.empty())
         _nodeName = str;
 }
 
-std::string Node::getListName()const
+std::string Node::getNodeName()const
 {
     return _nodeName;
 }
 
-std::vector<sharedVariablePtr> Node::getVariables()const
+std::vector<SharedVariablePtr> Node::getVariables()const
 {
     return _dataVariables;
 }
 
-void Node::setId(int id){
-
+void Node::setId(int id)
+{
     _id = id > 0? id : 0;
 }
 
-int Node::getId()const{
+int Node::getId()const
+{
     return _id;
 }
