@@ -2,52 +2,47 @@
 #define NODE_H
 
 #include "resources.h"
+#include "variablenode.h"
 
-namespace Pr{
+namespace Pr
+{
+class Node
+{
+public:
 
-    class Node{
+    Node();
+    Node(Node * parent,
+         const std::pair<int, int> &bodyPosition,
+         const std::string &NodeName,
+         int nesting,
+         int id);
 
-    private:
+    std::vector<SharedNodePtr>      getChildren()const;
+    std::vector<SharedVariablePtr>  getVariables()const;
+    std::pair<int, int>             getBodyPosition()const;
+    std::string                     getNodeName()const;
+    Node *                          getParent()const;
+    int                             getNesting()const;
+    int                             getId()const;
 
-        std::vector<sharedNodePtr> _children;
-        std::vector<sharedVariablePtr> _dataVariables;
-        weakNodePtr _parent;
-        std::pair<int, int> _bodyPosition;
-        std::string _listName;
-        int _nesting;
-        int _id;
-        Type _nodeType;
+    void setBodyPosition(const std::pair<int, int> &positions);
+    void setParent(Node *parent);
+    void setNesting(int value);
+    void addChild(const SharedNodePtr &child);
+    void addVariable(const SharedVariablePtr &var);
+    void setNodeName(const std::string str);
+    void setId(int id);
 
-    public:
+private:
 
-        Node();
-        Node(const weakNodePtr &parent,
-             const std::pair<int, int> &bodyPosition,
-             const std::string &listName,
-             int nesting,
-             int id,
-             Type nodeType);
-
-        std::vector<sharedNodePtr> getChildren()const;
-        std::pair<int, int> getBodyPosition()const;
-        weakNodePtr getParent()const;
-        int getNesting()const;
-        Type getNodeType()const;
-        std::string getListName()const;
-        std::vector<sharedVariablePtr> getVariables()const;
-        int getId()const;
-
-        void setBodyPosition(const std::pair<int, int> &positions);
-        void setParent(const weakNodePtr &parent);
-        void setNesting(int value);
-        void setNodeType(Type t);
-        void addChild(const sharedNodePtr &child,
-                      const weakNodePtr &parent);
-        void addVariable(const sharedVariablePtr &var);
-        void setListName(const std::string str);
-        void setId(int id);
-
-    };
+    std::vector<SharedNodePtr>      _children;
+    std::vector<SharedVariablePtr>  _dataVariables;
+    std::pair<int, int>             _bodyPosition;
+    std::string                     _nodeName;
+    Node*                           _parent;
+    int                             _nesting;
+    int                             _id;
+};
 }
 
 #endif // NODE_H

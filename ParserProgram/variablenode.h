@@ -2,39 +2,34 @@
 #define VARIABLENODE_H
 
 #include "resources.h"
+#include "node.h"
 
-namespace Pr{
+namespace Pr
+{
+class VariableNode
+{
+private:
 
-    class VariableNode{
+    std::string _variableName;
+    std::string _variableValue;
+    Node* _parent;
+    int _id;
 
-    private:
+public:
 
-        std::string _variableName;
-        std::string _variableValue;
-        weakNodePtr _parent;
-        int _id;
-        Pr::Type _varType;
+    VariableNode(const std::string &name,
+                 const std::string &value,
+                 Node *parent,
+                 int id);
+    VariableNode();
 
-    public:
+    std::string getVariableName()const;
+    std::string getVariableValue()const;
+    Node*       getParent()const;
+    int         getId()const;
 
-        VariableNode(const std::string &name,
-                     const weakNodePtr &parent,
-                     int id);
-        VariableNode(const std::string &name,
-                     const std::string &value,
-                     weakNodePtr &parent,
-                     int id,
-                     Pr::Type varType);
-        VariableNode();
-
-        std::string getVariableName()const;
-        std::string getVariableValue()const;
-        weakNodePtr getParent()const;
-        int getId()const;
-
-        void setVariableName(const std::string name);
-        void setParent(const weakNodePtr &parent);
-    };
-
+    void setVariableName(const std::string& name);
+    void setParent(Node *parent);
+};
 }
 #endif // VARIABLENODE_H

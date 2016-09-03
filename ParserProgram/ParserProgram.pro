@@ -4,14 +4,19 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    node_source.cpp \
-    nodetree_source.cpp \
-    parser_source.cpp \
-    variablenode_source.cpp
+    node.cpp \
+    nodetree.cpp \
+    variablenode.cpp \
+    parseengine.cpp \
+    xmltreewriter.cpp \
+    parserprogram.cpp
 
 HEADERS += \
     node.h \
     nodetree.h \
-    parser.h \
     resources.h \
-    variablenode.h
+    variablenode.h \
+    parseengine.h \
+    itreewriter.h \
+    xmltreewriter.h \
+    parserprogram.h
