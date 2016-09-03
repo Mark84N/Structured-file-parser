@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8">
+
+<tree>
+
+	<node name="shape" id="1" level="1">
+
+		<variable name="isItWorks" id="11" level="2"> Yes of course </variable>
+		<variable name="type" id="12" level="2"> tetrahedron </variable>
+		<variable name="ofProgram" id="32" level="2"> parser </variable>
+		
+		<node name="vertices" id="2" level="2">
+
+			<variable name="pointsType" id="13" level="3"> three_dimensional </variable>
+			
+			<node name="point" id="3" level="3">
+
+				<variable name="x" id="14" level="4"> 1 </variable>
+				<variable name="y" id="15" level="4"> 0 </variable>
+				<variable name="z" id="16" level="4"> 0 </variable>
+				
+			</node>
+
+			<node name="point" id="4" level="3">
+
+				<variable name="x" id="17" level="4"> 0 </variable>
+				<variable name="y" id="18" level="4"> 1 </variable>
+				<variable name="z" id="19" level="4"> 0 </variable>
+				
+			</node>
+
+			<node name="point" id="5" level="3">
+
+				<variable name="pointVariable" id="20" level="4"> trailing Point Variable </variable>
+				<variable name="x" id="24" level="4"> 0 </variable>
+				<variable name="y" id="25" level="4"> 0 </variable>
+				<variable name="z" id="26" level="4"> 1 </variable>
+				
+				<node name="nestedPoint1" id="6" level="4">
+
+					<variable name="x" id="21" level="5"> X1 </variable>
+					<variable name="y" id="22" level="5"> Y1 </variable>
+					
+					<node name="extraNestedPoint" id="7" level="5">
+
+						<variable name="extraNestedVariable" id="23" level="6"> XY </variable>
+						
+					</node>
+
+				</node>
+
+				<node name="nestedPoint2" id="8" level="4">
+
+					<variable name="x" id="27" level="5"> X2 </variable>
+					<variable name="y" id="28" level="5"> Y2 </variable>
+					
+				</node>
+
+			</node>
+
+			<node name="point" id="9" level="3">
+
+				<variable name="x" id="29" level="4"> 1 </variable>
+				<variable name="y" id="30" level="4"> 1 </variable>
+				<variable name="z" id="31" level="4"> 1 </variable>
+				
+			</node>
+
+		</node>
+
+		<node name="color" id="10" level="2">
+
+			<variable name="r" id="33" level="3"> 0xFF </variable>
+			<variable name="g" id="34" level="3"> 0x00 </variable>
+			<variable name="b" id="35" level="3"> 0x80 </variable>
+			<variable name="alpha" id="36" level="3"> 0x80 </variable>
+			
+		</node>
+
+	</node>
+
+</tree>
