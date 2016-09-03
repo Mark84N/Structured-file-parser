@@ -1,12 +1,11 @@
-#include <parser.h>
+#include <parserprogram.h>
 
 int main(int argc, char *argv[])
 {
     try
     {
-        Pr::ParserProgram pr("parse.txt");
-        //pr.writeToFile("out.txt");
-        pr.printTreeStructure();
+        Pr::ParserProgram pr("parse.txt", new Pr::XMLTreeWriter);
+        pr.writeToFile("C://users//mark//desktop//tree.txt");
     }
     catch(const std::invalid_argument &err)
     {
