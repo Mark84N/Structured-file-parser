@@ -1,32 +1,23 @@
-#include "node.h"
 #include "variablenode.h"
-
 using namespace  Pr;
 
 VariableNode::VariableNode(const std::string &name,
-                               const std::string &value,
-                               Node* parent,
-                               int id):
-    _variableName(name),
-    _variableValue(value),
-    _parent(parent),
-    _id(id)
+                           const std::string &value,
+                           Node* parent,
+                           int id)
+    :
+      _variableName(name),
+      _variableValue(value),
+      _parent(parent),
+      _id(id)
 { }
 
-VariableNode::VariableNode(const std::string &name,
-                               Node *parent,
-                               int id):
-    _variableName(name),
-    _variableValue(),
-    _parent(parent),
-    _id(id)
-{ }
-
-VariableNode::VariableNode():
-    _variableName(),
-    _variableValue(),
-    _parent(nullptr),
-    _id(0)
+VariableNode::VariableNode()
+    :
+      _variableName(),
+      _variableValue(),
+      _parent(nullptr),
+      _id(0)
 { }
 
 std::string VariableNode::getVariableName()const
@@ -44,7 +35,7 @@ Node* VariableNode::getParent()const
     return _parent;
 }
 
-void VariableNode::setVariableName(const std::string name)
+void VariableNode::setVariableName(const std::string& name)
 {
     if (!name.empty())
         _variableName = name;
@@ -52,7 +43,6 @@ void VariableNode::setVariableName(const std::string name)
 
 void VariableNode::setParent(Node *parent)
 {
-    //if (parent.lock())
     if (parent)
         _parent = parent;
 }
